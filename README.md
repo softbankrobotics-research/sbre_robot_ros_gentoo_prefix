@@ -11,6 +11,7 @@ You need to install docker first to build the image.
 Before building ros, you need to build the gentoo prefix based on ubuntu 16.04 with:
 
 `cd gentoo_emerge`
+
 `docker build --network host -f Dockerfile -t gentoo_emerge_xenial .`
 
 Each step will take some time.
@@ -20,6 +21,7 @@ Each step will take some time.
 Now, you can build ros kinetic with the image gentoo_emerge_xenial:
 
 `cd ros_base`
+
 `docker build --network host -f Dockerfile -t sbre_robot_ros_kinetic_gentoo_prefix .`
 
 ## Send the gentoo prefix on your robot's head
@@ -33,6 +35,7 @@ Now you can send the compressed file named sbre_robot_ros_kinetic_gentoo_prefix.
 on your robot:
 
 `cd /tmp`
+
 `scp sbre_robot_ros_kinetic_gentoo_prefix.tar.gz nao@ROBOT_IP:.`
 
 
@@ -84,17 +87,21 @@ Create your catkin workspace:
 clone in your catkin workspace naoqi_driver and naoqi_bridge_msg:
 
 `cd ros_ws/src`
+
 `git clone https://github.com/ros-naoqi/naoqi_driver.git`
+
 `git clone https://github.com/ros-naoqi/naoqi_bridge_msgs.git`
 
 Compile the naoqi driver:
 
 `cd ~/ros_ws`
+
 `catkin_make`
 
 Now you can launch naoqi_driver:
 
 `source ~/ros_ws/devel/setup.bash`
+
 `roslaunch naoqi_driver naoqi_driver.launch`
 
 

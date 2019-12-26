@@ -8,7 +8,7 @@ You need to install docker first to build the image.
 
 ## Build gentoo_emerge_bionic
 
-Before building ros, you need to build the gentoo prefix based on ubuntu 16.04 with:
+Before building ros, you need to build the gentoo prefix based on ubuntu 18.04 with:
 
 `cd gentoo_emerge`
 

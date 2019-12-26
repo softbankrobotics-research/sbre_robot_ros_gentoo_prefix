@@ -64,7 +64,7 @@ RUN $PREFIXED emerge ros-melodic/ros_base
 
 # Patches for tf2 and tf
 RUN mkdir -p $EPREFIX/etc/portage/patches/ros-melodic/tf2
-COPY patches/0001-Remove-signals-to-enable-build.patch $EPREFIX/etc/portage/patches/ros-melodic/tf2.patch
+COPY patches/0001-Remove-signals-to-enable-build.patch $EPREFIX/etc/portage/patches/ros-melodic/tf2/0001-Remove-signals-to-enable-build.patch
 RUN mkdir -p $EPREFIX/etc/portage/patches/ros-melodic/tf
 COPY patches/0001-Remove-signals-so-to-build-with-boost-1.71.0.patch $EPREFIX/etc/portage/patches/ros-melodic/tf/0001-Remove-signals-so-to-build-with-boost-1.71.0.patch
 

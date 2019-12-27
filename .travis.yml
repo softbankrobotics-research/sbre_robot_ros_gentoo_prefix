@@ -1,0 +1,13 @@
+services:
+  - docker
+
+addons:
+  apt:
+    packages:
+      - docker-ce
+
+before_install:
+  - cd gentoo_emerge
+  - docker build --network host -f Dockerfile -t gentoo_emerge_xenial .
+  - cd ../ros_base
+  - docker build --network host -f Dockerfile -t sbre_robot_ros_kinetic_gentoo_prefix .

@@ -1,4 +1,4 @@
-# Just Ubuntu 16.04 with a user called user and some basic tools
+# Just Ubuntu 18.04 with a user called user and some basic tools
 FROM ubuntu:18.04
 
 RUN apt-get update

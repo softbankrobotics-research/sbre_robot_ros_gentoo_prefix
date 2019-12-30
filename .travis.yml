@@ -9,4 +9,4 @@ addons:
 script:
   - echo "Test ros_kinetic branch"
   - cd gentoo_emerge
-  - grep -Fxq "ubuntu:16.04" Dockerfile
+  - cat Dockerfile | grep "ubuntu:16.04"

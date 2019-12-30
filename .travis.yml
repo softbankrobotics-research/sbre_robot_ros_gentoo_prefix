@@ -6,8 +6,7 @@ addons:
     packages:
       - docker-ce
 
-before_install:
+script:
+  - echo "Test ros_kinetic branch"
   - cd gentoo_emerge
-  - travis_wait 120 docker build --quiet --network host -f Dockerfile -t gentoo_emerge_xenial .
-  - cd ../ros_base
-  - travis_wait 120 docker build --quiet --network host -f Dockerfile -t sbre_robot_ros_kinetic_gentoo_prefix .
+  - grep -Fxq "ubuntu:16.04" Dockerfile

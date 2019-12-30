@@ -8,6 +8,6 @@ addons:
 
 before_install:
   - cd gentoo_emerge
-  - docker build --quiet --network host -f Dockerfile -t gentoo_emerge_xenial .
+  - travis_wait docker build --quiet --network host -f Dockerfile -t gentoo_emerge_xenial .
   - cd ../ros_base
-  - docker build --quiet --network host -f Dockerfile -t sbre_robot_ros_kinetic_gentoo_prefix .
+  - travis_wait docker build --quiet --network host -f Dockerfile -t sbre_robot_ros_kinetic_gentoo_prefix .

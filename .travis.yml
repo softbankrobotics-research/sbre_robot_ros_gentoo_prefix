@@ -9,5 +9,5 @@ addons:
 script:
   - echo "Test ros_melodic branch"
   - cd gentoo_emerge
-  - grep -Fxq "ubuntu:18.04" Dockerfile
+  - cat Dockerfile | grep "ubuntu:18.04"
       

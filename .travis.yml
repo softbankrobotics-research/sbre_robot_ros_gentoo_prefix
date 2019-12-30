@@ -6,8 +6,8 @@ addons:
     packages:
       - docker-ce
 
-before_install:
+script:
+  - echo "Test ros_melodic branch"
   - cd gentoo_emerge
-  - travis_wait 120 docker build --quiet --network host -f Dockerfile -t gentoo_emerge_bionic .
-  - cd ../ros_base
-  - travis_wait 120 docker build --quiet --network host -f Dockerfile -t sbre_robot_ros_melodic_gentoo_prefix .
+  - grep -Fxq "ubuntu:18.04" Dockerfile
+      

@@ -1,5 +1,5 @@
 # sbre_robot_ros_gentoo_prefix
-Build a gentoo prefix with ros to be able to launch ros on the pepper's and nao's head (Naoqi version >= 2.9), be able to use emerge or catkin_make... This repository is based on the work of [Sam Pfeiffer](https://github.com/awesomebytes) and more specially on three repositories:
+Build a gentoo prefix with ros to be able to launch ros on the pepper's and nao's head (Naoqi version 2.9), be able to use emerge or catkin_make... This repository is based on the work of [Sam Pfeiffer](https://github.com/awesomebytes) and more specially on three repositories:
 * https://github.com/awesomebytes/gentoo_prefix_ci
 * https://github.com/awesomebytes/ros_overlay_on_gentoo_prefix
 * https://github.com/awesomebytes/pepper_os
@@ -120,6 +120,27 @@ Compile the naoqi driver:
 `cd ~/ros_ws`
 
 `catkin_make`
+
+Before running naoqi_driver, you need to deactivate some modules (in 2.9 some modules' name changed).
+Modify the file naoqi_driver/share/boot_config.json with:
+
+`"diag":
+    {
+      "enabled": false,
+      "frequency"     : 1
+    }`
+
+`"sonar":
+    {
+      "enabled":  false,
+      "frequency"     : 10
+    }`
+
+`"audio":
+    {
+      "enabled": false
+    }`
+
 
 Now you can launch naoqi_driver:
 

@@ -1,5 +1,5 @@
 # Just Ubuntu 16.04 with a user called user and some basic tools
-FROM ubuntu:16.04
+FROM 32bit/ubuntu:16.04
 
 RUN apt-get update
 # Add sudo

@@ -1,4 +1,4 @@
-FROM gentoo_emerge_xenial
+FROM gentoo_emerge_xenial_32
 WORKDIR /home/user
 USER user
 
@@ -119,4 +119,4 @@ RUN $PREFIXED emerge ros-kinetic/naoqi_libqi
 RUN $PREFIXED emerge ros-kinetic/naoqi_libqicore
 
 
-RUN cd /tmp; tar cvzf sbre_robot_ros_kinetic_gentoo_prefix.tar.gz gentoo
+RUN cd /tmp; tar cvzf sbre_robot_ros_kinetic_gentoo_prefix_32.tar.gz gentoo

@@ -12,7 +12,7 @@ Before building ros, you need to build the gentoo prefix based on ubuntu 16.04 3
 
 `cd gentoo_emerge`
 
-`docker build --network host -f Dockerfile -t gentoo_emerge_xenial .`
+`docker build --network host -f Dockerfile -t gentoo_emerge_xenial_32 .`
 
 Each step will take some time.
 
@@ -22,21 +22,21 @@ Now, you can build ros kinetic with the image gentoo_emerge_xenial:
 
 `cd ros_base`
 
-`docker build --network host -f Dockerfile -t sbre_robot_ros_kinetic_gentoo_prefix .`
+`docker build --network host -f Dockerfile -t sbre_robot_ros_kinetic_gentoo_prefix_32 .`
 
 ## Send the gentoo prefix on your robot's head
 
 You have now a docker image with gentoo prefix and ros kinetic installed.
 To install it on your robot first run your docker image:
 
-`docker run -it sbre_robot_ros_kinetic_gentoo_prefix`
+`docker run -it sbre_robot_ros_kinetic_gentoo_prefix_32`
 
 Now you can send the compressed file named sbre_robot_ros_kinetic_gentoo_prefix.tar.gz
 on your robot:
 
 `cd /tmp`
 
-`scp sbre_robot_ros_kinetic_gentoo_prefix.tar.gz nao@ROBOT_IP:.`
+`scp sbre_robot_ros_kinetic_gentoo_prefix_32.tar.gz nao@ROBOT_IP:.`
 
 
 
@@ -46,7 +46,7 @@ Ssh on your robot to launch the gentoo prefix:
 
 Uncompressed the gentoo prefix on your robot (you can remove the compressed file afterward):
 
-`tar xzf sbre_robot_ros_kinetic_gentoo_prefix.tar.gz`
+`tar xzf sbre_robot_ros_kinetic_gentoo_prefix_32.tar.gz`
 
 ## Use gentoo prefix and ROS
 

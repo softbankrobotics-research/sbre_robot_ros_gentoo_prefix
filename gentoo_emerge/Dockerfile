@@ -44,16 +44,16 @@ ENV EPREFIX /tmp/gentoo
 
 
 # Bootstrap Gentoo Prefix
-RUN LATEST_TREE_YES=1 TESTING_PV=latest ./bootstrap-prefix.sh ${EPREFIX} noninteractive stage1
+RUN LATEST_TREE_YES=1 TESTING_PV=latest linux32 ./bootstrap-prefix.sh ${EPREFIX} noninteractive stage1
 
 # Bootstrap Gentoo Prefix
-RUN LATEST_TREE_YES=1 TESTING_PV=latest ./bootstrap-prefix.sh ${EPREFIX} noninteractive stage2
+RUN LATEST_TREE_YES=1 TESTING_PV=latest linux32 ./bootstrap-prefix.sh ${EPREFIX} noninteractive stage2
 
 # Bootstrap Gentoo Prefix
-RUN LATEST_TREE_YES=1 TESTING_PV=latest ./bootstrap-prefix.sh ${EPREFIX} noninteractive stage3
+RUN LATEST_TREE_YES=1 TESTING_PV=latest linux32 ./bootstrap-prefix.sh ${EPREFIX} noninteractive stage3
 
 # Bootstrap Gentoo Prefix
-RUN LATEST_TREE_YES=1 TESTING_PV=latest ./bootstrap-prefix.sh ${EPREFIX} noninteractive
+RUN LATEST_TREE_YES=1 TESTING_PV=latest linux32 ./bootstrap-prefix.sh ${EPREFIX} noninteractive
 
 # Remove bootstrap-prefix.sh
 RUN rm bootstrap-prefix.sh

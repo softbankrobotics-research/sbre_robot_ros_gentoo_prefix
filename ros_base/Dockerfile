@@ -4,12 +4,13 @@ USER user
 
 RUN bash /tmp/gentoo/executeonprefix emerge --version
 
-ENV PREFIXED=/tmp/gentoo/executeonprefix
+ENV PREFIXED="linux32 /tmp/gentoo/executeonprefix"
 ENV EPREFIX=/tmp/gentoo
 
 # UTF-8 and locale-gen
 RUN echo "en_US.UTF-8 UTF-8" >> $EPREFIX/etc/locale.gen
 RUN $PREFIXED locale-gen
+ENV CHOST i686-pc-linux-gnu
 
 RUN $PREFIXED emerge --sync
 RUN $PREFIXED emerge --oneshot portage
@@ -39,6 +40,8 @@ auto-sync = yes" > $EPREFIX/etc/portage/repos.conf/gentoo.conf
 RUN $PREFIXED emerge --sync
 RUN $PREFIXED emerge --oneshot portage
 
+RUN $PREFIXED eselect python set 2
+
 # Config in python 2.7
 RUN echo "# From the Docker image of ros-overlay\n\
 # mainly force to build just Python 2.7\n\
@@ -51,6 +54,20 @@ ros-lunar/* PYTHON_SINGLE_TARGET: -* python2_7\n\
 # Package.mask config
 RUN echo ">=dev-lisp/sbcl-1.5.0" >> /tmp/gentoo/etc/portage/package.mask
 RUN echo ">=dev-python/wxpython-4.0.6" >> /tmp/gentoo/etc/portage/package.mask
+
+# package.accept_keywords
+# Needed to emerge dev-python/rosdep on 32b
+RUN echo "# required by dev-python/rosdep-0.13.0::ros-overlay\n\
+# required by dev-python/rosdep (argument)\n\
+=dev-python/catkin_pkg-9999 **\n\
+# required by dev-python/rosdep-0.13.0::ros-overlay\n\
+# required by dev-python/rosdep (argument)\n\
+=dev-python/rosdistro-9999 **\n\
+# required by dev-python/rosdistro-9999::gentoo\n\
+# required by dev-python/rosdep-0.13.0::ros-overlay\n\
+# required by dev-python/rosdep (argument)\n\
+=dev-python/rospkg-9999 **\n\
+=dev-libs/console_bridge-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
 
 # sync ros-overlay
 RUN $PREFIXED emaint sync -r ros-overlay
@@ -105,6 +122,11 @@ RUN $PREFIXED emerge ros-kinetic/image_transport
 RUN $PREFIXED emerge ros-kinetic/diagnostic_updater
 RUN rm /tmp/gentoo/var/repo/ros-overlay/ros-kinetic/orocos_kdl/files/*
 RUN $PREFIXED ebuild /tmp/gentoo/var/repo/ros-overlay/ros-kinetic/orocos_kdl/*.ebuild manifest
+
+# package.accecpt_keywords for robot_state_publisher
+RUN echo "=dev-libs/urdfdom_headers-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+RUN echo "=dev-libs/urdfdom-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+
 RUN $PREFIXED emerge ros-kinetic/robot_state_publisher
 RUN $PREFIXED emerge ros-kinetic/tf2_geometry_msgs
 

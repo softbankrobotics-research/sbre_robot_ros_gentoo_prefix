@@ -51,7 +51,7 @@ Uncompressed the gentoo prefix on your robot (you can remove the compressed file
 ## Use gentoo prefix and ROS
 
 In order to use the gentoo prefix and ros by default you can
-send the .bash_profile on the robot's head or follow the next step.
+send the .bash_profile (ros_base/config/.bash_profile) on the robot's head or follow the next step.
 
 ### Use gentoo prefix
 

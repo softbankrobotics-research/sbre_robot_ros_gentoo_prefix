@@ -56,18 +56,12 @@ RUN echo ">=dev-lisp/sbcl-1.5.0" >> /tmp/gentoo/etc/portage/package.mask
 RUN echo ">=dev-python/wxpython-4.0.6" >> /tmp/gentoo/etc/portage/package.mask
 
 # package.accept_keywords
-# Needed to emerge dev-python/rosdep on 32b
-RUN echo "# required by dev-python/rosdep-0.13.0::ros-overlay\n\
-# required by dev-python/rosdep (argument)\n\
-=dev-python/catkin_pkg-9999 **\n\
-# required by dev-python/rosdep-0.13.0::ros-overlay\n\
-# required by dev-python/rosdep (argument)\n\
-=dev-python/rosdistro-9999 **\n\
-# required by dev-python/rosdistro-9999::gentoo\n\
-# required by dev-python/rosdep-0.13.0::ros-overlay\n\
-# required by dev-python/rosdep (argument)\n\
-=dev-python/rospkg-9999 **\n\
-=dev-libs/console_bridge-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+RUN echo "=dev-python/catkin_pkg-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+RUN echo "=dev-python/rosdistro-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+RUN echo "=dev-python/rospkg-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+RUN echo "=dev-libs/console_bridge-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+RUN echo "=dev-libs/urdfdom_headers-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
+RUN echo "=dev-libs/urdfdom-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
 
 # sync ros-overlay
 RUN $PREFIXED emaint sync -r ros-overlay
@@ -90,6 +84,11 @@ COPY patches/0001-Boost-milliseconds-long-patch-on-floats.patch /tmp/gentoo/etc/
 # Quick Fix before next PR
 RUN rm /tmp/gentoo/var/repo/ros-overlay/ros-kinetic/catkin/files/0001-Workaround-error-issue-ros-overlay-711.patch
 RUN $PREFIXED ebuild /tmp/gentoo/var/repo/ros-overlay/ros-kinetic/catkin/*.ebuild manifest
+
+RUN $PREFIXED emerge sys-apps/dbus
+
+RUN mkdir -p /tmp/gentoo/etc/portage/profile && \
+    echo "sys-fs/udev-init-scripts-32" >> /tmp/gentoo/etc/portage/profile/package.provided
 
 # Install ros_base
 RUN $PREFIXED emerge ros-kinetic/ros_base
@@ -123,10 +122,6 @@ RUN $PREFIXED emerge ros-kinetic/diagnostic_updater
 RUN rm /tmp/gentoo/var/repo/ros-overlay/ros-kinetic/orocos_kdl/files/*
 RUN $PREFIXED ebuild /tmp/gentoo/var/repo/ros-overlay/ros-kinetic/orocos_kdl/*.ebuild manifest
 
-# package.accecpt_keywords for robot_state_publisher
-RUN echo "=dev-libs/urdfdom_headers-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
-RUN echo "=dev-libs/urdfdom-9999 **" >> $EPREFIX/etc/portage/package.accept_keywords
-
 RUN $PREFIXED emerge ros-kinetic/robot_state_publisher
 RUN $PREFIXED emerge ros-kinetic/tf2_geometry_msgs
 
@@ -140,5 +135,7 @@ COPY patches/libqicore-release.patch /tmp/gentoo/etc/portage/patches/ros-kinetic
 RUN $PREFIXED emerge ros-kinetic/naoqi_libqi
 RUN $PREFIXED emerge ros-kinetic/naoqi_libqicore
 
+# Install dev-python/distro for rospkg
+RUN $PREFIXED emerge dev-python/distro
 
 RUN cd /tmp; tar cvzf sbre_robot_ros_kinetic_gentoo_prefix_32.tar.gz gentoo

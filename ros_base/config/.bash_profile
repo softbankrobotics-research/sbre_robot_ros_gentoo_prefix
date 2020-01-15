@@ -1,5 +1,5 @@
 ./gentoo/startprefix
-source /tmp/gentoo/opt/ros/kinetic/setup.bash
+source /tmp/gentoo/opt/ros/melodic/setup.bash
 export CATKIN_PREFIX_PATH=/tmp/gentoo/opt/ros/melodic
 
 # The ros ip use WLAN0 by default if you want to use ETH0 by default comment

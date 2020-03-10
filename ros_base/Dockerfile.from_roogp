@@ -21,8 +21,8 @@ RUN echo ">=x11-libs/libxkbcommon-0.9.1 X" >> /tmp/gentoo/etc/portage/package.us
 RUN echo ">=dev-libs/libpcre2-10.34 pcre16" >> /tmp/gentoo/etc/portage/package.use
 RUN echo ">=sci-libs/vtk-8.1.0-r3 qt5 rendering" >> /tmp/gentoo/etc/portage/package.use
 
-RUN $PREFIXED emerge =media-libs/opencv-3.4.1-r7
-RUN $PREFIXED emerge =dev-lang/ruby-2.4.9
+# RUN $PREFIXED emerge =media-libs/opencv-3.4.1-r7
+# RUN $PREFIXED emerge =dev-lang/ruby-2.4.9
 
 # Install dev-qt
 RUN echo "dev-qt/qtgui -libinput -udev" >> /tmp/gentoo/etc/portage/package.use

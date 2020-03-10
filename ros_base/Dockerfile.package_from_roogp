@@ -1,0 +1,6 @@
+FROM awesomebytes/sbre_os_kinetic_32b
+
+# Create the .tar.gz
+RUN tar cvzf /tmp/sbre_os.tar.gz gentoo
+
+ENTRYPOINT ["/bin/bash"]

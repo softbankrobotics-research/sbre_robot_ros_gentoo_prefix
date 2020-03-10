@@ -24,6 +24,13 @@ RUN echo ">=sci-libs/vtk-8.1.0-r3 qt5 rendering" >> /tmp/gentoo/etc/portage/pack
 # RUN $PREFIXED emerge =media-libs/opencv-3.4.1-r7
 # RUN $PREFIXED emerge =dev-lang/ruby-2.4.9
 
+# Taken from awesomebytes/ros_overlay_on_gentoo_prefix_32b ROS desktop Dockerfile3
+# As reported here https://github.com/ros/ros-overlay/issues/581
+# For cv_bridge, camera_calibration_parsers (at least)
+RUN $PREFIXED emerge dev-libs/boost[python]
+RUN cd $EPREFIX/usr/lib &&\
+    ln -s libboost_python27.so libboost_python.so
+
 # Install dev-qt
 RUN echo "dev-qt/qtgui -libinput -udev" >> /tmp/gentoo/etc/portage/package.use
 RUN $PREFIXED emerge dev-qt/qtcore dev-qt/qtgui

@@ -1,4 +1,4 @@
-FROM awesomebytes/roogp_32b_ros_melodic_ros_base
+FROM awesomebytes/roogp_32b_ros_kinetic_ros_base
 
 # Start building custom packages maintained by SoftBank Robotics
 # Patches for libqi and libqicore

@@ -10,7 +10,7 @@ jobs:
       docker_image_name: sbre_os_kinetic_32b
 
     steps:
-    - script: docker build --network host -f ros_base/Dockerfile.from_roogp -t $(DockerHub_user)/$(docker_image_name):$(Build.BuildId) .
+    - script: cd ros_base; docker build --network host -f Dockerfile.from_roogp -t $(DockerHub_user)/$(docker_image_name):$(Build.BuildId) .
       displayName: 'docker build'
       # This means up to 6h
       timeoutInMinutes: 0
@@ -51,7 +51,7 @@ jobs:
     - script: df -h && df && cat /proc/meminfo && docker system prune -a -f && df -h && df
       displayName: 'Check disk space and RAM and docker cleanup'
 
-    - script: docker build -f ros_base/Dockerfile.package_from_roogp -t $(DockerHub_user)/$(docker_image_name):$(Build.BuildId) .
+    - script: cd ros_base; docker build -f Dockerfile.package_from_roogp -t $(DockerHub_user)/$(docker_image_name):$(Build.BuildId) .
       displayName: 'docker build package_stage'
       # This means up to 6h
       timeoutInMinutes: 0

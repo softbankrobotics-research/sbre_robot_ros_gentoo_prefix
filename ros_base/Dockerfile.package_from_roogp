@@ -1,6 +1,6 @@
 FROM awesomebytes/sbre_os_kinetic_32b
 
-# Create the .tar.gz
-RUN tar cvzf /tmp/sbre_os.tar.gz gentoo
+# Create the compressed file
+RUN tar -c --lzma -f /tmp/pepper_os.tar.lzma gentoo
 
 ENTRYPOINT ["/bin/bash"]

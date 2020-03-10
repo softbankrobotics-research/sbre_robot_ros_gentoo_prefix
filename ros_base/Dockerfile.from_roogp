@@ -1,5 +1,6 @@
 FROM awesomebytes/roogp_32b_ros_melodic_ros_base
 
+# Start building custom packages maintained by SoftBank Robotics
 # Patches for libqi and libqicore
 RUN mkdir -p /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqi-2.5.0-r3
 COPY patches/libqi-release.patch /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqi-2.5.0-r3/libqi-release.patch

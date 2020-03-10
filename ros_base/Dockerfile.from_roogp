@@ -1,0 +1,40 @@
+FROM awesomebytes/roogp_32b_ros_melodic_ros_base
+
+# Patches for libqi and libqicore
+RUN mkdir -p /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqi-2.5.0-r3
+COPY patches/libqi-release.patch /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqi-2.5.0-r3/libqi-release.patch
+RUN mkdir -p /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqicore-2.3.1-r1
+COPY patches/libqicore-release.patch /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqicore-2.3.1-r1/libqicore-release.patch
+
+#install libqi and libqicore
+RUN $PREFIXED emerge ros-kinetic/naoqi_libqi
+RUN $PREFIXED emerge ros-kinetic/naoqi_libqicore
+
+# Install dev-python/distro for rospkg
+RUN $PREFIXED emerge dev-python/distro
+
+# Package.use config
+RUN echo ">=media-libs/gd-2.2.5-r2 jpeg truetype fontconfig png" >> /tmp/gentoo/etc/portage/package.use
+RUN echo ">=x11-libs/libxcb-1.13.1 xkb" >> /tmp/gentoo/etc/portage/package.use
+RUN echo ">=x11-libs/libxkbcommon-0.9.1 X" >> /tmp/gentoo/etc/portage/package.use
+RUN echo ">=dev-libs/libpcre2-10.34 pcre16" >> /tmp/gentoo/etc/portage/package.use
+RUN echo ">=sci-libs/vtk-8.1.0-r3 qt5 rendering" >> /tmp/gentoo/etc/portage/package.use
+
+RUN $PREFIXED emerge =media-libs/opencv-3.4.1-r7
+RUN $PREFIXED emerge =dev-lang/ruby-2.4.9
+
+# Install dev-qt
+RUN echo "dev-qt/qtgui -libinput -udev" >> /tmp/gentoo/etc/portage/package.use
+RUN $PREFIXED emerge dev-qt/qtcore dev-qt/qtgui
+RUN echo ">=dev-python/PyQt5-5.14.0 gui widgets" >> /tmp/gentoo/etc/portage/package.use
+RUN $PREFIXED emerge dev-qt/qttest dev-qt/qtconcurrent dev-qt/qtwidgets dev-python/PyQt5[gui,widgets]
+
+RUN $PREFIXED emerge ros-kinetic/cv_bridge
+RUN $PREFIXED emerge ros-kinetic/geometry_msgs
+RUN $PREFIXED emerge ros-kinetic/image_transport
+RUN $PREFIXED emerge ros-kinetic/diagnostic_updater
+RUN $PREFIXED emerge ros-kinetic/robot_state_publisher
+RUN $PREFIXED emerge ros-kinetic/tf2_geometry_msgs
+
+
+RUN cd /tmp; tar czf sbre_robot_ros_kinetic_gentoo_prefix_32.tar.gz gentoo

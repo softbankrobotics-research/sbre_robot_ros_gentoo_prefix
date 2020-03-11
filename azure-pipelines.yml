@@ -7,7 +7,7 @@ jobs:
       vmImage: 'Ubuntu 16.04'
 
     variables:
-      docker_image_name: sbre_os_melodic_32b
+      docker_image_name: sbre_os_melodic
 
     steps:
     - script: cd ros_base; docker build --network host -f Dockerfile.from_roogp -t $(DockerHub_user)/$(docker_image_name):$(Build.BuildId) .
@@ -43,7 +43,7 @@ jobs:
       vmImage: 'Ubuntu 16.04'
 
     variables:
-      docker_image_name: sbre_os_melodic_32b_package_stage
+      docker_image_name: sbre_os_melodic_package_stage
       platform: x86
       rosdistro: ros-melodic
 

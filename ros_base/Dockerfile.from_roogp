@@ -13,6 +13,9 @@ COPY ebuilds/naoqi_libqi-2.5.0-r3.ebuild $EPREFIX/usr/local/portage/ros-melodic/
 COPY ebuilds/naoqi_libqicore-2.3.1-r1.ebuild $EPREFIX/usr/local/portage/ros-melodic/naoqi_libqicore
 RUN echo ">naoqi_libqi-2.9" >> $EPREFIX/etc/portage/package.mask
 RUN echo ">naoqi_libqicore-2.9" >> $EPREFIX/etc/portage/package.mask
+RUN $PREFIXED ebuild $EPREFIX/usr/local/portage/ros-melodic/naoqi_libqi/naoqi_libqi-2.5.0-r3.ebuild manifest
+RUN $PREFIXED ebuild $EPREFIX/usr/local/portage/ros-melodic/naoqi_libqicore/naoqi_libqicore-2.3.1-r1.ebuild manifest
+
 
 #install libqi and libqicore
 RUN $PREFIXED emerge ros-melodic/naoqi_libqi

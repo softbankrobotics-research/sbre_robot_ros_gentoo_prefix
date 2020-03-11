@@ -1,4 +1,4 @@
-FROM awesomebytes/roogp_ros_kinetic_desktop
+FROM awesomebytes/roogp_ros_kinetic_desktop_3
 
 # Start building custom packages maintained by SoftBank Robotics
 # Patches for libqi and libqicore

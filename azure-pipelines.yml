@@ -7,7 +7,7 @@ jobs:
       vmImage: 'Ubuntu 16.04'
 
     variables:
-      docker_image_name: sbre_os_kinetic_32b
+      docker_image_name: sbre_os_kinetic_32
 
     steps:
     - script: cd ros_base; docker build --network host -f Dockerfile.from_roogp -t $(DockerHub_user)/$(docker_image_name):$(Build.BuildId) .
@@ -43,7 +43,7 @@ jobs:
       vmImage: 'Ubuntu 16.04'
 
     variables:
-      docker_image_name: sbre_os_kinetic_32b_package_stage
+      docker_image_name: sbre_os_kinetic_32_package_stage
       platform: x86
       rosdistro: ros-kinetic
 
@@ -89,7 +89,7 @@ jobs:
         export DATE=$(date -I'minutes' | sed 's/+/plus/g'| sed 's/:/at/g')
         export RELEASE_TAG=release/${DATE}
         export RELEASE_FILE_NAME=sbre_os_$(rosdistro)-${PLATFORM}_${DATE}.tar.lzma
-        export RELEASE_NAME="SBRE OS based on Gentoo Prefix and ROS Kinetic"
+        export RELEASE_NAME="SBRE OS based on Gentoo Prefix and ROS Kinetic (x86 32b)"
         export BODY="Extract with: cat ${RELEASE_FILE_NAME}.part-* > ${RELEASE_FILE_NAME}; tar xvf sbre_os_*.tar.lzma; ./gentoo/startprefix"
         mv $HOME/sbre_os_.tar.lzma ${RELEASE_FILE_NAME}
         docker system prune -a -f

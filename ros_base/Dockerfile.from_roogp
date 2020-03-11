@@ -1,4 +1,4 @@
-FROM awesomebytes/roogp_ros_melodic_ros_base
+FROM awesomebytes/roogp_ros_kinetic_desktop
 
 # Start building custom packages maintained by SoftBank Robotics
 # Patches for libqi and libqicore
@@ -11,41 +11,12 @@ COPY patches/libqicore-release.patch /tmp/gentoo/etc/portage/patches/ros-kinetic
 RUN $PREFIXED emerge ros-kinetic/naoqi_libqi
 RUN $PREFIXED emerge ros-kinetic/naoqi_libqicore
 
-# Install dev-python/distro for rospkg
-RUN $PREFIXED emerge dev-python/distro
-
 # Package.use config
 RUN echo ">=media-libs/gd-2.2.5-r2 jpeg truetype fontconfig png" >> /tmp/gentoo/etc/portage/package.use
 RUN echo ">=x11-libs/libxcb-1.13.1 xkb" >> /tmp/gentoo/etc/portage/package.use
 RUN echo ">=x11-libs/libxkbcommon-0.9.1 X" >> /tmp/gentoo/etc/portage/package.use
 RUN echo ">=dev-libs/libpcre2-10.34 pcre16" >> /tmp/gentoo/etc/portage/package.use
 RUN echo ">=sci-libs/vtk-8.1.0-r3 qt5 rendering" >> /tmp/gentoo/etc/portage/package.use
-
-# RUN $PREFIXED emerge =media-libs/opencv-3.4.1-r7
-# RUN $PREFIXED emerge =dev-lang/ruby-2.4.9
-
-# Taken from awesomebytes/ros_overlay_on_gentoo_prefix_32b ROS desktop Dockerfile3
-# As reported here https://github.com/ros/ros-overlay/issues/581
-# For cv_bridge, camera_calibration_parsers (at least)
-RUN $PREFIXED emerge dev-libs/boost[python]
-RUN cd $EPREFIX/usr/lib &&\
-    ln -s libboost_python27.so libboost_python.so
-# Numpy doesn't support Python 2.7 anymore
-# and we are still pending on migrating to Python 3 (as ROS is)
-# ros-melodic/opencv_bridge fails to emerge with:
-# ImportError: No module named numpy
-# CMake Error at src/CMakeLists.txt:25 (message):
-#   Could not determine the NumPy include directory, verify that NumPy was
-#   installed correctly.
-# So we install the latest Python2 compatible numpy version
-RUN echo ">dev-python/numpy-1.17" >> $EPREFIX/etc/portage/package.mask && \
-    $PREFIXED emerge dev-python/numpy
-
-# Install dev-qt
-RUN echo "dev-qt/qtgui -libinput -udev" >> /tmp/gentoo/etc/portage/package.use
-RUN $PREFIXED emerge dev-qt/qtcore dev-qt/qtgui
-RUN echo ">=dev-python/PyQt5-5.14.0 gui widgets" >> /tmp/gentoo/etc/portage/package.use
-RUN $PREFIXED emerge dev-qt/qttest dev-qt/qtconcurrent dev-qt/qtwidgets dev-python/PyQt5[gui,widgets]
 
 RUN $PREFIXED emerge ros-kinetic/cv_bridge
 RUN $PREFIXED emerge ros-kinetic/geometry_msgs

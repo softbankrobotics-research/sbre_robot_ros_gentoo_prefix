@@ -54,7 +54,9 @@ RUN $PREFIXED emerge ros-kinetic/diagnostic_updater
 RUN $PREFIXED emerge ros-kinetic/robot_state_publisher
 RUN $PREFIXED emerge ros-kinetic/tf2_geometry_msgs
 
-# TODO: Include the building of naoqi_driver here
+# Trying to build naoqi_driver, but ignoring if it fails for now...
+RUN $PREFIXED emerge ros-melodic/naoqi_driver || true
+
 
 # Do that in separate packaging stage
 # RUN cd /tmp; tar czf sbre_robot_ros_kinetic_gentoo_prefix_32.tar.gz gentoo

@@ -1,4 +1,4 @@
-FROM awesomebytes/sbre_os_kinetic_32b
+FROM awesomebytes/sbre_os_melodic
 
 # Create the compressed file
 RUN tar -c --lzma -f /tmp/pepper_os.tar.lzma gentoo

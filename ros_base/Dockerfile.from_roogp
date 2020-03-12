@@ -26,7 +26,7 @@ RUN $PREFIXED emerge ros-kinetic/robot_state_publisher
 RUN $PREFIXED emerge ros-kinetic/tf2_geometry_msgs
 
 # Trying to build naoqi_driver, but ignoring if it fails for now...
-RUN $PREFIXED emerge ros-melodic/naoqi_driver || true
+RUN $PREFIXED emerge ros-kinetic/naoqi_driver || true
 
 
 # Do that in separate packaging stage

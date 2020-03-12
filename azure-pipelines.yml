@@ -44,7 +44,7 @@ jobs:
 
     variables:
       docker_image_name: sbre_os_melodic_package_stage
-      platform: x86
+      platform: amd64
       rosdistro: ros-melodic
 
     steps:

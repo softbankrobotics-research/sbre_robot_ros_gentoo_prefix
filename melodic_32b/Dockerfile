@@ -45,6 +45,16 @@ RUN sed -i -e 's/j2/j'"$((`grep -c \^processor \/proc\/cpuinfo` / 2))"'/g' $EPRE
 # Install qt
 RUN $PREFIXED emerge dev-qt/qtcore dev-qt/qtgui dev-qt/qttest dev-qt/qtconcurrent dev-qt/qtwidgets
 
+# Patches for libqi and libqicore
+RUN mkdir -p /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqi-2.5.0-r3
+COPY patches/libqi-release.patch /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqi-2.5.0-r3/libqi-release.patch
+RUN mkdir -p /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqicore-2.3.1-r1
+COPY patches/libqicore-release.patch /tmp/gentoo/etc/portage/patches/ros-kinetic/naoqi_libqicore-2.3.1-r1/libqicore-release.patch
+
+# Install libqi and libqicore
+RUN $PREFIXED emerge ros-kinetic/naoqi_libqi
+RUN $PREFIXED emerge ros-kinetic/naoqi_libqicore
+
 # Install dev-python/distro for rospkg
 RUN $PREFIXED emerge dev-python/distro
 
@@ -83,6 +93,10 @@ RUN wget https://gist.githubusercontent.com/awesomebytes/0564296907ff82603376fce
 RUN mkdir -p $EPREFIX/etc/portage/patches/ros-melodic/tf-1.12.0 &&\
     wget https://gist.githubusercontent.com/awesomebytes/cee46d45d1314d8df4512ed577c55227/raw/4a5edd58e84a0fa010089da7bdf6caa934d6936d/boost_signals_tf_1.12.0.patch -O $EPREFIX/etc/portage/patches/ros-melodic/tf-1.12.0/boost_signals.patch &&\
     $PREFIXED emerge ros-melodic/tf
+# config to install robot_state_publisher
+RUN echo "=dev-libs/urdfdom_headers-9999 **" >> /tmp/gentoo/etc/portage/package.accept_keywords
+RUN echo "=dev-libs/urdfdom-9999 **" >> /tmp/gentoo/etc/portage/package.accept_keywords
+RUN echo "=dev-libs/collada-dom-9999 **" >> /tmp/gentoo/etc/portage/package.accept_keywords
 RUN $PREFIXED emerge ros-melodic/robot_state_publisher
 RUN $PREFIXED emerge ros-melodic/tf2_geometry_msgs
 

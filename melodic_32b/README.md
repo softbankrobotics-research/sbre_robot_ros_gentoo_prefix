@@ -66,32 +66,6 @@ Fix the ROS_IP variable with your ROBOT_IP:
 
 Now you can use catkin_make or roscore
 
-### Libqi and Libqicore
-
-Create your catkin workspace:
-
-`mkdir -p ros_ws/src`
-
-Clone in your catkin workspace libqi-release and libqicore-release in kinetic (Issue for now with melodic version and boost > 1.70):
-
-`cd ros_ws/src`
-
-`git clone --branch release/kinetic/naoqi_libqi https://github.com/ros-naoqi/libqi-release.git`
-
-`git clone --branch release/kinetic/naoqi_libqicore https://github.com/ros-naoqi/libqicore-release.git`
-
-Use the libqi-release.patch and libqicore-release.patch in the patches folder (use scp to send them or create patch files):
-
-`git apply libqi-release.patch`
-
-`git apply libqicore-release.patch`
-
-Compile Libqi and Libqicore:
-
-`cd ~/ros_ws`
-
-`catkin_make`
-
 
 ### Naoqi_driver
 

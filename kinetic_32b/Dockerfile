@@ -1,5 +1,4 @@
 FROM awesomebytes/roogp_32b_ros_kinetic_ros_base:1465
-#15
 
 ## Config before installations
 

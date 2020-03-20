@@ -6,18 +6,12 @@ Build a gentoo prefix with ros to be able to launch ros on the pepper's and nao'
 
 ## Naoqi 2.5
 
-Use the branch ros_kinetic_32
+Use kinetic_32 or melodic_32
 
 ## Naoqi 2.9
 
-Use the branch ros_kinetic or ros_melodic
+Use kinetic or melodic
 
 # Docker image
 
-All build can be found on docker hub [here](https://hub.docker.com/r/mcaniot/sbre_robot_ros_gentoo_prefix). You can also pull the latest version with these commands:
-
-ros_kinetic_32 : `docker pull mcaniot/sbre_robot_ros_gentoo_prefix:sbre_robot_ros_kinetic_gentoo_prefix_32`
-
-ros_kinetic : `docker pull mcaniot/sbre_robot_ros_gentoo_prefix:sbre_robot_ros_kinetic_gentoo_prefix`
-
-ros_melodic : `docker pull mcaniot/sbre_robot_ros_gentoo_prefix:sbre_robot_ros_melodic_gentoo_prefix`
+All build can be found on docker hub [here](https://hub.docker.com/repository/docker/softbankroboticsresearch/sbre_robot_ros_gentoo_prefix).

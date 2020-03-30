@@ -6,7 +6,7 @@ Build a gentoo prefix with ros to be able to launch ros on the pepper's and nao'
 
 ## Naoqi 2.5
 
-Use kinetic_32 or melodic_32
+Use kinetic_32b or melodic_32b
 
 ## Naoqi 2.9
 
